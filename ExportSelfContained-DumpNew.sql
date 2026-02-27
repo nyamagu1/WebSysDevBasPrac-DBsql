@@ -188,12 +188,13 @@ CREATE TABLE `members` (
   `member_code` varchar(10) NOT NULL,
   `member_name` varchar(10) NOT NULL,
   `hashed_pass` varchar(60) DEFAULT NULL,
+  `member_type_id` int NOT NULL,
+  `last_stuff_log_id` int DEFAULT NULL,
   `email1` varchar(45) DEFAULT NULL,
   `email2` varchar(45) DEFAULT NULL,
   `created` datetime NOT NULL,
   `withdrawal` datetime DEFAULT NULL,
-  `member_type_id` int NOT NULL,
-  `last_stuff_log_id` int DEFAULT NULL,
+  `point` int DEFAULT NULL,
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `member_id_UNIQUE` (`member_id`),
   UNIQUE KEY `member_code_UNIQUE` (`member_code`),
@@ -210,7 +211,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'s001','aaa','$2a$10$iqsnVA26BKTbNoXQuyX6lO9M6mdKVqPKqvYA7a9sd9u54uud.0/h6',NULL,NULL,'2026-02-12 00:00:00',NULL,1,NULL),(2,'2222','あああ',NULL,'abc@gmail.com','xyz@gmail.com','2026-02-12 00:00:00',NULL,2,NULL),(3,'333','いいいいい',NULL,'efg@gmail.com',NULL,'2026-02-17 00:00:00',NULL,3,NULL),(4,'s002','sss',NULL,'sss@gmail.com',NULL,'2026-02-18 00:00:00',NULL,1,NULL),(5,'u111','111',NULL,'uuu@gmail.com',NULL,'2026-02-18 00:00:00',NULL,2,NULL),(6,'r222','uketule','$2a$10$I/is2zBqosN67d2IUVe/3Opv3q6NnAtb54lCMbzxDcSkXZ7M7V74C',NULL,NULL,'2026-02-25 00:00:00',NULL,5,NULL);
+INSERT INTO `members` VALUES (1,'s001','aaa','$2a$10$iqsnVA26BKTbNoXQuyX6lO9M6mdKVqPKqvYA7a9sd9u54uud.0/h6',1,NULL,NULL,NULL,'2026-02-12 00:00:00',NULL,NULL),(2,'2222','あああ',NULL,2,NULL,'abc@gmail.com','xyz@gmail.com','2026-02-12 00:00:00',NULL,NULL),(3,'333','いいいいい',NULL,3,NULL,'efg@gmail.com',NULL,'2026-02-17 00:00:00',NULL,5000),(4,'s002','sss',NULL,1,NULL,'sss@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(5,'u111','111',NULL,2,NULL,'uuu@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(6,'r222','受付スタッフ-R','$2a$10$I/is2zBqosN67d2IUVe/3Opv3q6NnAtb54lCMbzxDcSkXZ7M7V74C',5,NULL,NULL,NULL,'2026-02-25 00:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-26  9:25:52
+-- Dump completed on 2026-02-27 15:58:35
