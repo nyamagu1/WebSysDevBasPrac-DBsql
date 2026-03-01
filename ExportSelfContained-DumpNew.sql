@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `point_payment_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `point_payment_db`;
--- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: point_payment_db
 -- ------------------------------------------------------
--- Server version	8.0.23
+-- Server version	8.0.44
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,16 +25,16 @@ DROP TABLE IF EXISTS `class_fees`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `class_fees` (
-  `member_types_member_type_id` int NOT NULL,
-  `class_items_class_item_id` int NOT NULL,
+  `member_type_id` int NOT NULL,
+  `class_item_id` int NOT NULL,
   `class_fee` int NOT NULL,
   `created` datetime NOT NULL,
   `deleted` datetime DEFAULT NULL,
-  PRIMARY KEY (`member_types_member_type_id`,`class_items_class_item_id`),
-  KEY `fk_class_fees_member_types1_idx` (`member_types_member_type_id`),
-  KEY `fk_class_fees_class_items1_idx` (`class_items_class_item_id`),
-  CONSTRAINT `fk_class_fees_class_items1` FOREIGN KEY (`class_items_class_item_id`) REFERENCES `class_items` (`class_item_id`),
-  CONSTRAINT `fk_class_fees_member_types1` FOREIGN KEY (`member_types_member_type_id`) REFERENCES `member_types` (`member_type_id`)
+  PRIMARY KEY (`member_type_id`,`class_item_id`),
+  KEY `fk_class_fees_member_types1_idx` (`member_type_id`),
+  KEY `fk_class_fees_class_items1_idx` (`class_item_id`),
+  CONSTRAINT `fk_class_fees_class_items1` FOREIGN KEY (`class_item_id`) REFERENCES `class_items` (`class_item_id`),
+  CONSTRAINT `fk_class_fees_member_types1` FOREIGN KEY (`member_type_id`) REFERENCES `member_types` (`member_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -88,21 +88,21 @@ DROP TABLE IF EXISTS `logs`;
 CREATE TABLE `logs` (
   `log_id` int NOT NULL AUTO_INCREMENT,
   `created` datetime NOT NULL,
-  `operation_types_operation_type_id` int NOT NULL,
-  `members_stuff_member_id` int NOT NULL,
-  `members_target_member_id` int NOT NULL,
+  `operation_type_id` int NOT NULL,
+  `stuff_member_id` int NOT NULL,
+  `user_member_id` int NOT NULL,
   `class_item_id` int NOT NULL,
-  `charge` int DEFAULT NULL,
+  `charged` int DEFAULT NULL,
   `used` int DEFAULT NULL,
   `remaining` int NOT NULL,
-  PRIMARY KEY (`log_id`,`members_stuff_member_id`,`members_target_member_id`),
+  PRIMARY KEY (`log_id`,`stuff_member_id`,`user_member_id`),
   UNIQUE KEY `log_id_UNIQUE` (`log_id`),
-  KEY `fk_logs_members1_idx` (`members_stuff_member_id`),
-  KEY `fk_logs_members2_idx` (`members_target_member_id`),
-  KEY `fk_logs_operation_types1_idx` (`operation_types_operation_type_id`),
-  CONSTRAINT `fk_logs_members1` FOREIGN KEY (`members_stuff_member_id`) REFERENCES `members` (`member_id`),
-  CONSTRAINT `fk_logs_members2` FOREIGN KEY (`members_target_member_id`) REFERENCES `members` (`member_id`),
-  CONSTRAINT `fk_logs_operation_types1` FOREIGN KEY (`operation_types_operation_type_id`) REFERENCES `operation_types` (`operation_type_id`)
+  KEY `fk_logs_members1_idx` (`stuff_member_id`),
+  KEY `fk_logs_members2_idx` (`user_member_id`),
+  KEY `fk_logs_operation_types1_idx` (`operation_type_id`),
+  CONSTRAINT `fk_logs_members1` FOREIGN KEY (`stuff_member_id`) REFERENCES `members` (`member_id`),
+  CONSTRAINT `fk_logs_members2` FOREIGN KEY (`user_member_id`) REFERENCES `members` (`member_id`),
+  CONSTRAINT `fk_logs_operation_types1` FOREIGN KEY (`operation_type_id`) REFERENCES `operation_types` (`operation_type_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -124,15 +124,15 @@ DROP TABLE IF EXISTS `member_class_items`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `member_class_items` (
-  `members_member_id` int NOT NULL,
-  `class_items_class_item_id` int NOT NULL,
+  `member_id` int NOT NULL,
+  `class_item_id` int NOT NULL,
   `created` datetime NOT NULL,
   `deleted` datetime DEFAULT NULL,
-  PRIMARY KEY (`members_member_id`,`class_items_class_item_id`),
-  KEY `fk_member_class_item_members1_idx` (`members_member_id`),
-  KEY `fk_member_class_item_class_items1_idx` (`class_items_class_item_id`),
-  CONSTRAINT `fk_member_class_item_class_items1` FOREIGN KEY (`class_items_class_item_id`) REFERENCES `class_items` (`class_item_id`),
-  CONSTRAINT `fk_member_class_item_members1` FOREIGN KEY (`members_member_id`) REFERENCES `members` (`member_id`)
+  PRIMARY KEY (`member_id`,`class_item_id`),
+  KEY `fk_member_class_item_members1_idx` (`member_id`),
+  KEY `fk_member_class_item_class_items1_idx` (`class_item_id`),
+  CONSTRAINT `fk_member_class_item_class_items1` FOREIGN KEY (`class_item_id`) REFERENCES `class_items` (`class_item_id`),
+  CONSTRAINT `fk_member_class_item_members1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -252,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-02-27 15:58:35
+-- Dump completed on 2026-03-01 19:12:14
