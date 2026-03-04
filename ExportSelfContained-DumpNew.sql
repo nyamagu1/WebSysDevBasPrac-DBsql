@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `point_payment_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `point_payment_db`;
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: point_payment_db
 -- ------------------------------------------------------
--- Server version	8.0.44
+-- Server version	8.0.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,7 +44,7 @@ CREATE TABLE `class_fees` (
 
 LOCK TABLES `class_fees` WRITE;
 /*!40000 ALTER TABLE `class_fees` DISABLE KEYS */;
-INSERT INTO `class_fees` VALUES (2,2,850,'2026-02-17 00:00:00',NULL),(2,4,550,'2026-02-12 00:00:00',NULL),(3,5,700,'2026-02-17 00:00:00',NULL);
+INSERT INTO `class_fees` VALUES (2,1,1000,'2026-03-04 00:00:00',NULL),(2,2,850,'2026-02-17 00:00:00',NULL),(2,3,1200,'2026-03-04 00:00:00',NULL),(2,4,550,'2026-02-12 00:00:00',NULL),(3,3,1500,'2026-03-04 00:00:00',NULL),(3,5,700,'2026-02-17 00:00:00',NULL);
 /*!40000 ALTER TABLE `class_fees` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +103,7 @@ CREATE TABLE `logs` (
   CONSTRAINT `fk_logs_members1` FOREIGN KEY (`stuff_member_id`) REFERENCES `members` (`member_id`),
   CONSTRAINT `fk_logs_members2` FOREIGN KEY (`user_member_id`) REFERENCES `members` (`member_id`),
   CONSTRAINT `fk_logs_operation_types1` FOREIGN KEY (`operation_type_id`) REFERENCES `operation_types` (`operation_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` VALUES (2,'2026-02-12 00:00:00',1,1,2,1,5000,NULL,5000),(3,'2026-02-12 00:00:00',2,1,2,3,NULL,550,4450);
+INSERT INTO `logs` VALUES (2,'2026-02-12 00:00:00',1,1,2,1,5000,NULL,5000),(3,'2026-02-12 00:00:00',2,1,2,3,NULL,550,4450),(4,'2026-03-03 13:12:47',1,1,3,1,1000,0,8000),(5,'2026-03-03 13:14:48',1,1,3,1,3000,0,11000),(6,'2026-03-03 13:30:13',1,1,3,1,1000,0,12000);
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +211,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'s001','aaa','$2a$10$iqsnVA26BKTbNoXQuyX6lO9M6mdKVqPKqvYA7a9sd9u54uud.0/h6',1,NULL,NULL,NULL,'2026-02-12 00:00:00',NULL,NULL),(2,'2222','あああ',NULL,2,NULL,'abc@gmail.com','xyz@gmail.com','2026-02-12 00:00:00',NULL,NULL),(3,'333','いいいいい',NULL,3,NULL,'efg@gmail.com',NULL,'2026-02-17 00:00:00',NULL,5000),(4,'s002','sss',NULL,1,NULL,'sss@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(5,'u111','111',NULL,2,NULL,'uuu@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(6,'r222','受付スタッフ-R','$2a$10$I/is2zBqosN67d2IUVe/3Opv3q6NnAtb54lCMbzxDcSkXZ7M7V74C',5,NULL,NULL,NULL,'2026-02-25 00:00:00',NULL,NULL);
+INSERT INTO `members` VALUES (1,'s001','aaa','$2a$10$iqsnVA26BKTbNoXQuyX6lO9M6mdKVqPKqvYA7a9sd9u54uud.0/h6',1,3,NULL,NULL,'2026-02-12 00:00:00',NULL,NULL),(2,'2222','あああ',NULL,2,NULL,'abc@gmail.com','xyz@gmail.com','2026-02-12 00:00:00',NULL,NULL),(3,'333','いいいいい',NULL,3,NULL,'efg@gmail.com',NULL,'2026-02-17 00:00:00',NULL,12000),(4,'s002','sss',NULL,1,NULL,'sss@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(5,'u111','111',NULL,2,NULL,'uuu@gmail.com',NULL,'2026-02-18 00:00:00',NULL,NULL),(6,'r222','受付スタッフ-R','$2a$10$I/is2zBqosN67d2IUVe/3Opv3q6NnAtb54lCMbzxDcSkXZ7M7V74C',5,NULL,NULL,NULL,'2026-02-25 00:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-01 19:12:14
+-- Dump completed on 2026-03-04 16:04:48
